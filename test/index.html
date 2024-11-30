@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Large Dataset Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+      width: 60%;
+      height: 60%;
+      margin-bottom: 5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div>
+
+      <h1>Weight Sensor</h1>
+      <canvas id="weightChart"></canvas>
+    </div>
+    <div>
+
+      <h1>Ultrasonic Sensor</h1>
+      <canvas id="heightChart"></canvas>
+    </div>
+    <div>
+
+      <h1>Moisure Percentage %</h1>
+      <canvas id="moistureChart"></canvas>
+    </div>
+  </div>
+
+  <!-- <script src="data.js"></script> -->
+  <script src="main.js"></script>
+</body>
+
+</html>
