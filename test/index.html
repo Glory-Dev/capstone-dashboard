@@ -16,12 +16,15 @@
       text-align: center;
     }
 
-    .container {
-      width: 100vw;
-      height: 100vh;
+    .container {}
+
+    .container.circles {
       display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      gap: 5rem;
+      width: 30%;
+      margin: 0 auto;
+
+      canvas {}
     }
 
     canvas {
@@ -29,28 +32,30 @@
       margin: 0 auto;
       width: 60%;
       height: 60%;
-      margin-bottom: 5rem;
+      margin-bottom: 10rem;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="container graphs">
     <div>
-
-      <h1>Weight Sensor</h1>
-      <canvas id="weightChart"></canvas>
+      <h1>Mass Sensor</h1>
+      <canvas id="massChart"></canvas>
     </div>
     <div>
-
       <h1>Ultrasonic Sensor</h1>
       <canvas id="heightChart"></canvas>
     </div>
     <div>
-
-      <h1>Moisure Percentage %</h1>
-      <canvas id="moistureChart"></canvas>
+      <h1>Moisure Value</h1>
+      <canvas id="moistureValue"></canvas>
     </div>
+  </div>
+
+  <div class="container circles">
+    <canvas id="moisturePercentageCircle"></canvas>
+    <canvas id="fillPercentageCircle"></canvas>
   </div>
 
   <!-- <script src="data.js"></script> -->
