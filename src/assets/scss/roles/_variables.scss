@@ -1,0 +1,104 @@
+////////// COLOR SYSTEM //////////
+$blue: #00aeef;
+$indigo: #6610f2;
+$purple: #ab8ce4;
+$pink: #E91E63;
+$red: #ff0017;
+$orange: #fb9678;
+$yellow: #ffd500;
+$green: #3bd949;
+$teal: #58d8a3;
+$cyan: #57c7d4;
+$black: #000;
+$white: #ffffff;
+$white-smoke: #f4f4f4;
+$ghost-white: #f7fafc;
+$violet: #41478a;
+$darkslategray: #2e383e;
+$dodger-blue: #3498db;
+$blue-teal-gradient: linear-gradient(120deg, #556cdc, #128bfc, #18bef1);
+$blue-teal-gradient-light: linear-gradient(120deg, rgba(0, 228, 208, 0.7), rgba(89, 131, 232, 0.7));
+$theme-colors: (
+  "primary": #2196f3,
+  "secondary": #dde4eb,
+  "success": #19d895,
+  "info": #8862e0,
+  "warning": #ffaf00,
+  "danger": #ff6258,
+  "light": #fbfbfb,
+  "dark": #252C46
+);
+$colors: map-merge(("blue": $blue,
+      "indigo": $indigo,
+      "purple": $purple,
+      "pink": $pink,
+      "red": $red,
+      "orange": $orange,
+      "yellow": $yellow,
+      "green": $green,
+      "teal": $teal,
+      "cyan": $cyan,
+      "white": $white,
+      "white-smoke": #f3f5f6,
+      "gray": $gray-600,
+      "gray-light": #8ba2b5,
+      "gray-lightest": #f7f7f9,
+      "gray-dark": #292b2c),
+    $theme-colors);
+////////// SOCIAL COLORS //////////
+$social-colors: (
+  "twitter": #4DBFF5,
+  "facebook": #648ACA,
+  "google": #E55F4B,
+  "linkedin": #0177b4,
+  "pinterest": #cc2127,
+  "youtube": #e52d27,
+  "github": #333333,
+  "behance": #1769ff,
+  "dribbble": #ea4c89,
+  "reddit": #ff4500
+);
+
+////////// FONT VARIABLES //////////
+$font-family-sans-serif: 'Roboto', sans-serif;
+$font-size-base: 0.875rem;
+$text-muted: #858585 !default;
+$body-color: #001737 !default;
+
+////////// BREAKPOINTS //////////
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+////////// BUTTONS //////////
+$btn-padding-y: 0.4rem;
+$btn-padding-x: 1rem;
+$btn-font-size: $font-size-base;
+$btn-border-radius: 0.1875rem;
+
+///////// FORMS /////////
+$form-control-bg: lighten($white, 4%);
+$form-control-border-radius: 2px;
+$form-control-font-size: $font-size-base;
+$form-control-padding-y: 0.56rem;
+$form-control-padding-x: 1.375rem;
+
+//////// TABLES ////////
+$table-color: $body-color;
+$table-border-color: lighten($body-color, 50%);
+$table-hover-bg: lighten($body-color, 5%);
+
+//////// UTILITIES ////////
+$spacers: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem
+);

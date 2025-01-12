@@ -1,0 +1,19 @@
+/* Footer */
+.footer {
+  background: $footer-bg;
+  color: $footer-color;
+  padding: 20px 1rem;
+  transition: all 0.3 0.5;
+  border-top: $border-width solid $border-color;
+  font-size: calc(#{16px} - 0.05rem);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  a {
+    font-size: inherit;
+  }
+
+  @media (max-width: 991px) {
+    margin-left: 0;
+    width: 100%;
+  }
+}

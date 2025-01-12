@@ -1,0 +1,56 @@
+/* Layouts */
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../../node_modules/bootstrap/scss/functions.scss";
+@import "../../../node_modules/bootstrap/scss/variables.scss";
+@import "../../../node_modules/bootstrap/scss/variables-dark";
+@import "roles/variables";
+@import "layout/variables";
+
+
+@import "mixins/misc";
+@import "mixins/animation";
+// @import "layout/nav";
+@import "layout/navbar";
+@import "layout/sidebar";
+@import "layout/footer";
+@import "layout/layouts";
+@import "layout/card";
+@import "layout/misc";
+@import "layout/dashboard";
+
+/* === Template mixins === */
+@import "mixins/animation";
+@import "mixins/background";
+@import "mixins/blockqoute";
+@import "mixins/buttons";
+@import "mixins/cards";
+@import "mixins/misc";
+@import "mixins/text";
+
+/* === Core Styles === */
+@import "roles/reset";
+@import "roles/fonts";
+@import "roles/functions";
+@import "roles/typography";
+@import "roles/misc";
+@import "roles/utilities";
+@import "roles/demo";
+@import "roles/dashboard";
+
+/* === Components === */
+// @import "components/bootstrap-progress";
+// @import "components/buttons";
+// @import "components/cards";
+// @import "components/checkbox-radio";
+// @import "components/dropdown";
+// @import "components/forms";
+// @import "components/icons";
+// @import "components/lists";
+// @import "components/preview";
+// @import "components/tables";
+// @import "components/timeline";
+@import "components/plugin-overrides/chartjs";
+
+/* === Landing screens === */
+// @import "screens/auth";
+// @import "screens/error";
