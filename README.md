@@ -1,5 +1,7 @@
 # capstone-dashboard
 
+- Fixing Bugs :)
+
 
 Team 19309 Links
 
