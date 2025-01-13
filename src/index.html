@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="./../node_modules/sweetalert2/dist/sweetalert2.min.css">
   <!-- Chart.js library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- css file -->
@@ -155,7 +156,11 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h2>Prediction</h2>
+                  <div class="position-absolute w-100">
+                    <h2>Prediction</h2>
+                    <p id="predictionTime" class="text-center fs-4"></p>
+                  </div>
+                  <canvas id="predictedChart" class="pt-5"></canvas>
                 </div>
               </div>
             </div>
@@ -186,6 +191,7 @@
     </div>
   </div>
   <!-- Javascript -->
+  <script src="./../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <script src="assets/data/main.js"></script>
 </body>
 

@@ -1,5 +1,6 @@
-let massChart, heightChart, moistureValue; // Store chart instances
+let massChart, heightChart, moistureValue, predictedChart; // Store chart instances
 let moisturePercentageCircle, fillPercentageCircle; // Store circle chart instances
+const filePath = './assets/data/sensor_data.json'; // Replace with the actual path or URL
 
 // Plugin to add a percentage label inside doughnut charts
 Chart.register({
@@ -69,7 +70,6 @@ Chart.register({
             actualValue = chart.data.datasets[0].data[chart.data.datasets[0].data.length - 1];
             coefficientOfVariation = ((actualValue - mean) / mean) * 100;
         }
-
         // Draw the box above the chart
         const boxX = right - (width / 3) ; // Positioned Right
         const boxY = top - boxHeight - margin; // Positioned above the chart area
@@ -123,7 +123,7 @@ const horizontalLinePlugin = {
 
 const updateCharts = () => {
     // fetch('https://glory-dev.github.io/capstone-dashboard/src/assets/data/sensor_data.json')
-    fetch('./assets/data/sensor_data.json')
+    fetch(filePath)
         .then(response => response.json())
         .then(data => {
             // Use only the last 15 data entries
@@ -338,7 +338,113 @@ const updateCharts = () => {
         })
 };
 
+async function calculateEmptyingTimeFromFile(filePath, thresholdHeight = 14) {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+            throw new Error(`Error fetching the JSON file: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return calculateEmptyingTime(data, thresholdHeight);
+    } catch (error) {
+        console.error("An error occurred:", error.message);
+        return "Unable to calculate emptying time.";
+    }
+}
+
+function calculateEmptyingTime(data, thresholdHeight = 17) {
+    let startTime = null; // Time when the height exceeds the threshold
+    let endTime = null;   // Time when the height drops to <= 2 cm
+
+    for (let entry of data) {
+        const { time, height } = entry;
+
+        if (height <= 3) {
+            // Record the time when the height drops to <= 2 cm
+            startTime = new Date(time);
+        }
+
+        if (height >= thresholdHeight) {
+            // Record the time when the height first exceeds the threshold
+            endTime = new Date(time);
+            break; // Exit the loop as we found both start and end times
+        }
+    }
+
+    if (startTime && endTime) {
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            // Filter the data based on time range
+            const filteredData = data.filter(entry => {
+                const entryTime = new Date(entry.time);
+                return entryTime >= startTime && entryTime <= endTime;
+            });
+
+            // Extract the height values and time labels
+            const heights = filteredData.map(entry => entry.height);
+            const labels = filteredData.map(entry => {
+                const date = new Date(entry.time);
+                return date.toLocaleString(); // Format the time as a readable string
+            });
+
+            // Create the graph
+            const ctx = document.getElementById('predictedChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line', // You can choose 'bar', 'line', etc.
+                data: {
+                    labels: labels, // Time values on the x-axis
+                    datasets: [{
+                        label: 'Height',
+                        data: heights,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'category',
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            },
+                            ticks: {
+                                minRotation: 0, // Rotate labels vertically
+                                maxRotation: 0
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Height'
+                            }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+
+        const duration = (endTime - startTime) / (1000 * 60 * 60); // Duration in hours
+        return `Time taken for bin to be emptied: <b>${duration} hours.</b>`;
+    } else {
+        return "The conditions were not met (threshold height exceeded and returned to <= 3 cm).";
+    }
+}
+
 
 // Initial load and auto-update every 30 seconds
 updateCharts();
 setInterval(updateCharts, 10000);
+
+// 
+calculateEmptyingTimeFromFile(filePath, 14)
+    .then(result => predictionTime.innerHTML = result)
+    .catch(error => console.error("Error:", error));
