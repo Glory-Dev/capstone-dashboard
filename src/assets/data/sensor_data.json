@@ -1,4 +1,3 @@
-
 [
     {
         "time": "2024-11-26T08:48:00.000Z",
@@ -82,6 +81,17 @@
         "mass": 1.053,
         "moisture_analog_value": 535,
         "moisture_percentage": 29.0,
+        "height": 18.45,
+        "fill_percentage": 32.26,
+        "LED_green": 0,
+        "LED_yellow": 1,
+        "LED_red": 0
+    },
+    {
+        "time": "2024-11-26T08:51:30.000Z",
+        "mass": 6.053,
+        "moisture_analog_value": 535,
+        "moisture_percentage": 79.0,
         "height": 18.45,
         "fill_percentage": 32.26,
         "LED_green": 0,

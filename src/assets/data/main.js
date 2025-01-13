@@ -335,6 +335,38 @@ const updateCharts = () => {
                     }
                 });
             }
+            
+            // Alerts
+            if (lastEntry.height > 15 && lastEntry.mass > 5 && lastEntry.moisture_percentage > 70) {
+                Swal.fire({
+                    title: "Warning! You are in threaten",
+                    icon: "info",
+                    html: `Fill level: <strong style="color:red;">${lastEntry.fill_percentage}%</strong> <br> mass: <strong style="color: red;">${lastEntry.mass} kg</strong> <br> Moisture: <strong style="color: red;">${lastEntry.moisture_percentage}%</strong>`,
+                    showCloseButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: `Ok, I'm sending a truck`,
+                });
+            } else if (lastEntry.height > 15) {
+                Swal.fire({
+                    title: "Empty your bin now!",
+                    icon: "success",
+                    draggable: true,
+                    html: `The bin is about to be filled! It's reached <strong style="color:red;">${lastEntry.fill_percentage}%</strong>`,
+                    showCloseButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: `Ok, I'm working on it`,
+                });
+            } else if (lastEntry.mass > 5 || lastEntry.moisture_percentage > 70) {
+                Swal.fire({
+                    title: "Warning!",
+                    icon: "info",
+                    html: `It looks like the bin contains living organisms/bacteria or has exceeded the maximum mass<br>last detect: mass: <strong style="color: red;">${lastEntry.mass} kg</strong> and moisture: <strong>${lastEntry.moisture_percentage}%</strong>`,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: `Ok, I'm sending a truck`,
+                });
+            }
         })
 };
 
