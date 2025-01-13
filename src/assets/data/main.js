@@ -42,11 +42,11 @@ Chart.register({
         const applicableCharts = ['massChart', 'heightChart', "moistureValue"];
         if (!applicableCharts.includes(chart.canvas.id)) return;
 
-        const { ctx, chartArea } = chart;
-        const { top, right } = chartArea;
-        const boxWidth = 200;
+        const { ctx, chartArea, canvas } = chart;
+        const { top, right, width } = chartArea;
+        const boxWidth = 230;
         const boxHeight = 100;
-        const margin = 10; // Adjust margin for more spacing
+        const margin = 10; // Adjust margin for spacing between the box and the chart
 
         let title = '';
         let mean = 0;
@@ -70,30 +70,56 @@ Chart.register({
             coefficientOfVariation = ((actualValue - mean) / mean) * 100;
         }
 
-        // Draw the box at the top-right
+        // Draw the box above the chart
+        const boxX = right - (width / 3) ; // Positioned Right
+        const boxY = top - boxHeight - margin; // Positioned above the chart area
+
         ctx.save();
         ctx.fillStyle = '#fff';
         ctx.strokeStyle = '#000';
         ctx.lineWidth = 1;
-        ctx.fillRect(right - boxWidth - margin, top + margin, boxWidth, boxHeight);
-        ctx.strokeRect(right - boxWidth - margin, top + margin, boxWidth, boxHeight);
+        ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+        ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
 
         // Add text inside the box
         ctx.fillStyle = '#000';
         ctx.font = '14px Arial';
         ctx.textAlign = 'left';
 
-        const textX = right - boxWidth - margin + 10;
-        const textY = top + margin + 20;
+        const textX = boxX + 10;
+        const textY = boxY + 20;
 
         ctx.fillText(title, textX, textY);
         ctx.fillText(`Mean: ${mean.toFixed(1)}`, textX, textY + 20);
         ctx.fillText(`Actual Value: ${actualValue.toFixed(1)}`, textX, textY + 40);
-        ctx.fillText(`CV: ${coefficientOfVariation.toFixed(2)}%`, textX, textY + 60);
+        ctx.fillText(`Coefficient of Variation: ${coefficientOfVariation.toFixed(2)}%`, textX, textY + 60);
 
         ctx.restore();
     },
 });
+
+// Horizontal line => Thershold
+const horizontalLinePlugin = {
+    id: 'horizontalLinePlugin',
+    beforeDraw(chart, args, options) {
+        const { ctx, chartArea, scales } = chart;
+        const { left, right } = chartArea;
+        const yScale = scales.y;
+
+        // Get the pixel position for the threshold value
+        const yPosition = yScale.getPixelForValue(options.yValue);
+
+        // Draw the horizontal line
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(left, yPosition);
+        ctx.lineTo(right, yPosition);
+        ctx.strokeStyle = options.color || 'red'; // Default line color is red
+        ctx.lineWidth = options.lineWidth || 2; // Default line width is 2
+        ctx.stroke();
+        ctx.restore();
+    }
+};
 
 const updateCharts = () => {
     // fetch('https://glory-dev.github.io/capstone-dashboard/src/assets/data/sensor_data.json')
@@ -113,6 +139,11 @@ const updateCharts = () => {
             const lastEntry = recentData[recentData.length - 1];
             const moisturePercentage = parseFloat(lastEntry.moisture_percentage);
             const fillPercentage = parseFloat(lastEntry.fill_percentage);
+
+            // Mass Vlaue
+            const massValue = document.getElementById("massValue");
+            massValue.innerHTML = `${massData[massData.length - 1]} kg`;
+
 
             // Update Mass Chart with circles at points
             if (massChart) {
@@ -143,8 +174,20 @@ const updateCharts = () => {
                     },
                     options: {
                         responsive: true,
-                        scales: { y: { beginAtZero: true, max: 5 } }
+                        scales: { y: { beginAtZero: true, max: 7 } },
+                        layout: {
+                            padding: {
+                                top: 80
+                            }
+                        },
+                        plugins: {
+                        horizontalLinePlugin: {
+                            yValue: 5, // Threshold for mass
+                            lineWidth: 1 // Line width
+                        }
                     }
+                    },
+                    plugins: [horizontalLinePlugin] // Add the plugin here
                 });
             }
 
@@ -177,8 +220,20 @@ const updateCharts = () => {
                     },
                     options: {
                         responsive: true,
-                        scales: { y: { beginAtZero: true, max: 20 } }
-                    }
+                        scales: { y: { beginAtZero: true, max: 25 } },
+                        layout: {
+                            padding: {
+                                top: 80
+                            }
+                        },
+                        plugins: {
+                            horizontalLinePlugin: {
+                                yValue: 20, // Threshold for mass
+                                lineWidth: 1 // Line width
+                            }
+                        }
+                    },
+                    plugins: [horizontalLinePlugin] // Add the plugin here
                 });
             }
 
@@ -211,12 +266,25 @@ const updateCharts = () => {
                     },
                     options: {
                         responsive: true,
-                        scales: { y: { beginAtZero: false, min:300, max: 600 } }
-                    }
+                        scales: { y: { beginAtZero: false, min:300, max:750 } },
+                        layout: {
+                            padding: {
+                                top: 80
+                            }
+                        },
+                        plugins: {
+                            horizontalLinePlugin: {
+                                yValue: 600, // Threshold for mass
+                                lineWidth: 1 // Line width
+                            }
+                        }
+                    },
+                    plugins: [horizontalLinePlugin] // Add the plugin here
+
                 });
             }
 
-    // Update Moisture Percentage Circle
+            // Update Moisture Percentage Circle
             const moisturePercentageCtx = document.getElementById("moisturePercentageCircle").getContext("2d");
             if (moisturePercentageCircle) {
                 moisturePercentageCircle.data.datasets[0].data = [moisturePercentage, 100 - moisturePercentage];

@@ -15,28 +15,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- css file -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .mass-box {
-      padding: 2rem;
-      width: 300px;
-      height: 300px;
-      margin: 2rem auto;
-      border: 30px solid #3f51b5;
-      border-radius: 50%;
-
-      #massValue {
-        color: #3f51b5;
-
-        &+h4 {
-          color: #666;
-        }
-      }
-    }
-
-    .card h1 {
-      position: absolute;
-    }
-  </style>
   <!-- icon -->
   <link rel="shortcut icon" href="assets/images/favicon.ico" />
 </head>
@@ -101,81 +79,12 @@
         </ul>
       </nav>
       <!-- partial -->
-      <div class="main-panel">
+      <div class="main-panel" style="min-height: 100vh;">
         <div class="content-wrapper">
-          <!-- Page Title Header Starts-->
-          <div class="row page-title-header">
-            <div class="col-12">
-              <div class="page-header">
-                <h4 class="page-title fs-1 mb-1 pb-0">Dashboard</h4>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-3">
-              <div class="card">
-                <div class="card-body">
-                  <canvas id="moisturePercentageCircle"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="card">
-                <div class="card-body">
-                  <canvas id="fillPercentageCircle"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="card">
-                <div class="card-body mass-box d-flex flex-column justify-content-center align-items-center">
-                  <div id="massValue" class="text-center fs-1 fw-semibold"></div>
-                  <h4 class="text-center fs-2 fw-semibold">Current Mass</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="card">
-                <div class="card-body text-center">
-                  <img src="./assets/images/bin.png" alt="Garbage Bin" style="width: 200px" />
-                  <p class="mt-2">Hieght: 20cm<br> Max Weight: 5 kilogram<br> For office usage</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-1 g-4">
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h1>Trash Height</h1>
-                  <canvas id="heightChart"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h2>Prediction</h2>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h1>Mass Sensor</h1>
-                  <canvas id="massChart"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h1>Moisure Value</h1>
-                  <canvas id="moistureValue"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3428.1019056176033!2d31.016882799999998!3d30.7717192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7c93c1ad094ef%3A0x1eba2b6ba51e127d!2sGharbia%20STEM!5e0!3m2!1sen!2seg!4v1736698173187!5m2!1sen!2seg"
+            style="border:0; width: 100%; height: 100%;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -185,8 +94,6 @@
       </div>
     </div>
   </div>
-  <!-- Javascript -->
-  <script src="assets/data/main.js"></script>
 </body>
 
 </html>
